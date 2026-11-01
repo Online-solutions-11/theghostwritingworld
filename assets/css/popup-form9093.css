@@ -1,0 +1,187 @@
+/* Popup coupon */
+
+.form-control {
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: #F4F7FC;
+  height: 60px;
+  padding-left: 15px;
+}
+
+.form-control:focus, .form-control:hover {
+  border-color: var(--p-clr);
+  box-shadow: none;
+}
+textarea.form-control {
+    height: auto;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+.popup-coupon {
+    --p-clr: #4792e3;
+}
+  .popup-coupon {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999997;
+      background-color: rgb(0 0 0 / 60%);
+      transition: all .3s linear;
+      transform: scaleY(0);
+      transform-origin:center top;
+  }
+
+  .popup-coupon.pop-active {
+      transform: scaleY(1);
+
+  }
+  .popup-coupon-buttons input[type="submit"]{
+    width: auto;
+    line-height: 1;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 0px rgb(0 0 0 / 75%);
+    background: var(--p-clr); 
+    border-color: var(--p-clr);
+    color: #fff ;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: Poppins, sans-serif;
+    margin-bottom: 0px;
+  }
+  .popup-coupon-buttons input[type="submit"]:hover{
+    background: #fff; 
+    color: var(--p-clr);
+  }
+  .popup-coupon-inner {
+      background-color: #fff;
+      padding: 20px 40px;
+      border-radius: 15px;
+      max-width: 600px;
+      position: relative;
+  }
+  .popup-coupon-close {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      right: 10px;
+      top: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .popup-coupon-close a{
+      color: #fff;
+      font-size:22px;
+      font-weight: 600;
+      text-align: center;
+      border-radius: 50%;
+      border-width: 0;
+      background: #cd1010;
+      border: 2px solid transparent;
+      transition: all 0.2s linear;
+      box-sizing: border-box;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      line-height: 1.6;
+  }
+
+  .popup-coupon-close a:hover {
+      background: #fff;
+      border-color: #cd1010;
+      color: #cd1010 !important;
+  }
+  .popup-coupon-main textarea.form-control{
+      resize:none;
+  }
+  .popup-coupon-main .form-control{
+      border-radius:10px;
+  }
+  .popup-coupon-buttons {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+  }
+  .popup-coupon-activate {
+      position: relative;
+      padding-left:10px;
+      padding-right:10px;
+      font-size:24px;
+      color: #2a2a2a !important;
+      font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .popup-coupon-activate:before {
+      content: '';
+      display: block;
+      width: 5px;
+      background-color: var(--p-clr);
+      height: 100%;
+      position: absolute;
+      left:0;
+  }
+  .popup-coupon-last {
+     font-size:26px;
+     color: var(--p-clr);
+    }
+    .clr-1{
+      color: var(--p-clr);
+    }
+  @media (max-width:767px){
+    .popup-coupon{
+      padding: 0 10px;
+    }
+    .popup-coupon-inner{
+      padding: 20px 20px;
+      margin-top: 50px;
+    }
+    .popup-coupon-activate {
+     font-size:16px;
+     padding-right:20px;
+    }
+    .popup-coupon-last {
+     font-size:22px;
+    }   
+    
+    .popup-coupon-main input.form-control{
+     line-height:1;
+     font-size: 14px;
+     height: 45px;
+    }
+     .popup-coupon-main textarea.form-control{
+        height:80px;
+    }
+    .popup-coupon-buttons{
+        flex-direction:column;
+    }
+    .btn-con-popup-coupon{
+        margin:5px 0;
+    }
+    .btn-con-popup-coupon input[type="submit"] {
+      min-width: 220px;
+      padding: 10px;
+      font-size: 15px;
+      font-family: var(--font-900);
+    }
+    .popup-coupon {
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+    .popup-coupon-close {
+        height:25px;
+        width:25px;
+    }
+    .popup-coupon-close a{
+      font-size:18px;
+      line-height:17.5px;
+    }
+  }
+/* end popup coupon */
