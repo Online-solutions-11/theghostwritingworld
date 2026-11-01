@@ -875,6 +875,61 @@ Mississauga L5N 8H1 </li>
         data-cf-beacon='{"version":"2024.11.0","token":"126945fbcb7141368008a7e8dc8ecb36","r":1,"spa":2}'
         crossorigin="anonymous"></script>
     <script>(function () {function c() {var b = a.contentDocument || (a.contentWindow && a.contentWindow.document); if (b) {var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'a4d7facc8fcf0ffc',t:'MTc5MjQ5ODg1OA=='};var a=document.createElement('script');a.src='cdn-cgi/challenge-platform/h/b/scripts/jsd/d2d3316b729e/maind41d.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d)} } if (document.body) {var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else {var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) {e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c())}} } })();</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const header = document.querySelector(".custom-mobile-header");
+
+        if (!header) return;
+
+        const openBtn = header.querySelector(".custom-menu-toggle");
+        const closeBtn = header.querySelector(".custom-menu-close");
+        const overlay = header.querySelector(".custom-menu-overlay");
+        const drawer = header.querySelector(".custom-mobile-drawer");
+        const mobileLinks = header.querySelector(".custom-mobile-links");
+        const desktopMenu = header.querySelector("#navMenus");
+
+        if (desktopMenu && mobileLinks) {
+            const clonedMenu = desktopMenu.cloneNode(true);
+            clonedMenu.removeAttribute("id");
+
+            clonedMenu.querySelectorAll("[id]").forEach(function(el) {
+                el.removeAttribute("id");
+            });
+
+            mobileLinks.replaceChildren(clonedMenu);
+        }
+
+        function openMenu() {
+            header.classList.add("menu-open");
+            document.body.classList.add("custom-menu-active");
+            openBtn.setAttribute("aria-expanded", "true");
+            drawer.setAttribute("aria-hidden", "false");
+        }
+
+        function closeMenu() {
+            header.classList.remove("menu-open");
+            document.body.classList.remove("custom-menu-active");
+            openBtn.setAttribute("aria-expanded", "false");
+            drawer.setAttribute("aria-hidden", "true");
+        }
+
+        openBtn.addEventListener("click", openMenu);
+        closeBtn.addEventListener("click", closeMenu);
+        overlay.addEventListener("click", closeMenu);
+
+        mobileLinks.addEventListener("click", function(event) {
+            if (event.target.closest("a")) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeMenu();
+            }
+        });
+    });
+</script>
 </body>
 
 
