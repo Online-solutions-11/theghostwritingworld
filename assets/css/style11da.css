@@ -15098,13 +15098,12 @@ footer .footer-bottom {
   z-index: 999;
   height: 270px;
   cursor: pointer;
-  box-shadow: -20px 7px 18px -7px rgb(87 184 151 / 9%);
-  display: inline-block;
-  padding-top: 0;
-  vertical-align: top;
-  background: #4792e3;
-  background: linear-gradient(90deg, #e84a87 0%, #ff9cc8 100%);
-  margin-top: 198px;
+ box-shadow: -20px 7px 18px -7px rgb(209 187 196);
+    display: inline-block;
+    padding-top: 0;
+    vertical-align: top;
+    background: #4792e3;
+    background: linear-gradient(90deg, #a086e9 0%, #95798596 100%); margin-top: 198px;
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -15304,7 +15303,7 @@ footer .footer-bottom {
 .floatbutton .btns_wrap .call_wrap span.icoo {
   color: #fff;
   background: #a086e9;
-  background: linear-gradient(90deg, #e84a87 0%, #ff9cc8 100%);
+ background: linear-gradient(90deg, #a086e9 0%, #95798596 100%);
   font-size: 18px;
   padding: 18px 20px 16px;
   border-right: 1px solid #a086e9;
@@ -15313,6 +15312,8 @@ footer .footer-bottom {
   border-radius: 50px 0px 0px 50px;
 }
 
+ 
+   
 .floatbutton .btns_wrap .chat_wrap span {
   color: #333;
   font-size: 20px;
@@ -15691,7 +15692,7 @@ label.error {
 
 
 .navbar-brand img {
-  width: 150px;
+width: 309px;
 }
 
 .single-footer-widget .logo img {
