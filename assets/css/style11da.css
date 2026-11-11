@@ -15096,7 +15096,7 @@ footer .footer-bottom {
   background: #fff;
   width: 50px;
   z-index: 999;
-  height: 270px;
+  height: 340px;
   cursor: pointer;
  box-shadow: -20px 7px 18px -7px rgb(209 187 196);
     display: inline-block;
@@ -15146,26 +15146,28 @@ footer .footer-bottom {
 }
 
 .floatbutton .clickbutton .crossplus {
-  position: relative;
-  display: block;
-  transform: rotate(0deg);
-  -webkit-transition: 0.4s;
-  -moz-transition: 0.4s;
-  -o-transition: 0.4s;
-  transition: 0.4s;
-  position: absolute;
-  display: block;
-  transform: rotate(-90deg);
-  -webkit-transition: 0.4s;
-  font-size: 16px;
-  -moz-transition: 0.4s;
-  -o-transition: 0.4s;
-  transition: 0.4s;
-  color: #fff;
-  left: -79px;
-  white-space: pre;
-  bottom: 122px;
-  font-weight: bold;
+ position: relative;
+    display: block;
+    transform: rotate(0deg);
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+    position: absolute;
+    display: block;
+    transform: rotate(-90deg);
+    -webkit-transition: 0.4s;
+    font-size: 16px;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+    color: #fff;
+    left: -113px;
+    white-space: pre;
+    bottom: 157px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    line-height: 1;
 }
 
 .floatbutton .clickbutton .crossplus.rotate {
