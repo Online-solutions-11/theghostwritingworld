@@ -38,11 +38,10 @@
 
 
 @media (max-width: 575.98px) {
-    .others-option-for-responsive .dot-menu {
-   
-    right: 90px;
-    top: -77px;
-}
+       .others-option-for-responsive .dot-menu {
+        right: 90px;
+        top: -54px;
+    }
 .section-services h2 {
     font-size: 2.3rem;
   
@@ -72,6 +71,23 @@
     width: 100%;
     padding-bottom: 3rem;
 }
+    #hero .stage {
+      
+        display: none;
+    }
+    #hero .content h1 .w {
+   
+    font-size: 1.3rem !important;
+}
+    #hero .content {
+       
+        padding: 4rem 16px 0 !important;
+       
+    }
 }
 
-@media (max-width: 320.98px) {}
+@media (max-width: 400.98px) {
+        .others-option-for-responsive .dot-menu {
+     display: none;
+    }
+}
