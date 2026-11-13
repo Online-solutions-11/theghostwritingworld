@@ -449,7 +449,7 @@
         //      $(this).addClass("active");  // adding active class
         // });
     </script><!-- Start SaaS Main Banner -->
-    <section class="hero has-cursor" id="hero">
+    <section class="hero" id="hero">
         <div class="stage">
             <div class="lightcone" id="cone"></div>
             <div class="cord"></div>
@@ -588,400 +588,666 @@
 </div>
 
     </section>
-    <div class="cur-dot" id="dot"></div>
-    <div class="cur-ring" id="ring"></div>
-    <script>
-        $(function () {
-            const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const fine = matchMedia('(pointer:fine)').matches;
-            const $hero = $('#hero');
+ </section>
+<div class="cur-dot" id="dot"></div>
+<div class="cur-ring" id="ring"></div>
+<script>
+(function () {
+    function init() {
+        var hero = document.getElementById('hero');
+        if (!hero) return;
 
-            /* entrance */
-            if (!still) {
-                gsap.from('.rv', {opacity: 0, scale: .85, y: 30, duration: 1, stagger: .06, ease: 'back.out(1.4)'});
-                gsap.from('.rv2', {opacity: 0, y: 40, duration: .9, stagger: .15, delay: .4, ease: 'power3.out'});
+        // touch-only devices par custom cursor nahi
+        if (window.matchMedia('(hover: none)').matches) return;
 
-                /* idle motion */
-                $('.fl').each(function (i) {
-                    gsap.to(this, {y: (i % 2 ? -1 : 1) * (10 + i % 4 * 4), x: (i % 3 - 1) * 8, duration: 2.6 + (i % 4) * .5, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: i * .15});
-                });
-                $('.bub').each(function (i) {
-                    gsap.fromTo(this, {opacity: 0, scale: .4}, {opacity: 1, scale: 1, duration: 1.6 + (i % 4) * .5, repeat: -1, yoyo: true, repeatDelay: .3, ease: 'sine.inOut', delay: i * .25});
-                });
-                gsap.to('.spin', {rotation: 12, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-                gsap.set('#lamp', {transformOrigin: '51% 0'});
-                gsap.fromTo('#lamp', {rotation: -1.8}, {rotation: 1.8, duration: 3.4, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-                gsap.set('.sway', {transformOrigin: '50% 100%'});
-                gsap.to('.sway', {rotation: 2.5, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-                gsap.to('#glow', {opacity: .45, scale: 1.2, duration: 1.8, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-                gsap.to('#cone', {opacity: .6, duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-                $('.star').each(function (i) {
-                    gsap.to(this, {opacity: .15, scale: .5, duration: 1 + i * .35, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: i * .3});
-                });
-            }
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            /* mouse parallax */
-            const layers = $('.px').map(function () {
-                return {el: this, d: +$(this).data('d'), x: gsap.quickTo(this, 'x', {duration: 1.2, ease: 'power3'}), y: gsap.quickTo(this, 'y', {duration: 1.2, ease: 'power3'})};
-            }).get();
-            $hero.on('mousemove', function (e) {
-                if (still) return;
-                const nx = e.clientX / innerWidth - .5, ny = (e.clientY - this.getBoundingClientRect().top) / this.offsetHeight - .5;
-                layers.forEach(l => {l.x(-nx * l.d * 2); l.y(-ny * l.d * 2);});
-            }).on('mouseleave', () => layers.forEach(l => {l.x(0); l.y(0);}));
+        var ring = document.createElement('div');
+        var dot  = document.createElement('div');
+        ring.className = 'gw-ring';
+        dot.className  = 'gw-dot';
+        document.body.appendChild(ring);
+        document.body.appendChild(dot);
 
-            if (!fine || still) return;
+        var mx = -100, my = -100;      // mouse
+        var rx = -100, ry = -100;      // ring (smooth follow)
+        var rs = 1, ts = 1;            // ring scale (current / target)
+        var active = false, raf = null, lastSpark = 0;
 
-            /* custom cursor */
-            const dx = gsap.quickTo('#dot', 'x', {duration: .08}), dy = gsap.quickTo('#dot', 'y', {duration: .08});
-            const rx = gsap.quickTo('#ring', 'x', {duration: .45, ease: 'power3'}), ry = gsap.quickTo('#ring', 'y', {duration: .45, ease: 'power3'});
-            let last = 0;
-            $(document).on('mousemove', function (e) {
-                dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY);
-                const now = Date.now();
-                if ($(e.target).closest('#hero').length && now - last > 70) {
-                    last = now;
-                    const $s = $('<span class="spark">✦</span>').appendTo('body');
-                    gsap.fromTo($s[0], {x: e.clientX - 7, y: e.clientY - 7, scale: 1, opacity: 1, rotation: 0},
-                        {x: e.clientX - 7 + gsap.utils.random(-18, 18), y: e.clientY + gsap.utils.random(14, 36), scale: 0, opacity: 0, rotation: gsap.utils.random(-90, 90), duration: .9, ease: 'power2.out', onComplete: () => $s.remove()});
+        function loop() {
+            rx += (mx - rx) * 0.18;
+            ry += (my - ry) * 0.18;
+            rs += (ts - rs) * 0.2;
+            dot.style.transform  = 'translate3d(' + mx + 'px,' + my + 'px,0)';
+            ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0) scale(' + rs + ')';
+            raf = requestAnimationFrame(loop);
+        }
+
+        function show(e) {
+            mx = rx = e.clientX;
+            my = ry = e.clientY;
+            if (active) return;
+            active = true;
+            hero.classList.add('gw-cursor-on');
+            dot.style.opacity = 1;
+            ring.style.opacity = 1;
+            if (!raf) loop();
+        }
+
+        function hide() {
+            active = false;
+            hero.classList.remove('gw-cursor-on');
+            dot.style.opacity = 0;
+            ring.style.opacity = 0;
+            ts = 1;
+            ring.classList.remove('gw-ring-hover');
+        }
+
+        function spark(x, y) {
+            var s = document.createElement('span');
+            s.className = 'gw-spark';
+            s.textContent = '✦';
+            s.style.left = (x - 7) + 'px';
+            s.style.top  = (y - 7) + 'px';
+            document.body.appendChild(s);
+            var dx = (Math.random() * 36) - 18;
+            var dy = 14 + Math.random() * 22;
+            var rot = (Math.random() * 180) - 90;
+            var anim = s.animate([
+                { transform: 'translate(0,0) scale(1) rotate(0deg)', opacity: 1 },
+                { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(0) rotate(' + rot + 'deg)', opacity: 0 }
+            ], { duration: 900, easing: 'ease-out' });
+            anim.onfinish = function () { s.remove(); };
+        }
+
+        hero.addEventListener('mouseenter', show);
+        hero.addEventListener('mouseleave', hide);
+
+        hero.addEventListener('mousemove', function (e) {
+            if (!active) show(e);
+            mx = e.clientX;
+            my = e.clientY;
+
+            // hover state on links / buttons
+            var onLink = !!(e.target.closest && e.target.closest('a, button, .btn'));
+            ts = onLink ? 1.9 : 1;
+            ring.classList.toggle('gw-ring-hover', onLink);
+
+            // sparkle trail
+            if (!reduce) {
+                var now = Date.now();
+                if (now - lastSpark > 70) {
+                    lastSpark = now;
+                    spark(e.clientX, e.clientY);
                 }
-            });
-            $('a,.btn').on('mouseenter', () => gsap.to('#ring', {scale: 1.9, backgroundColor: 'rgba(200,163,106,.18)', duration: .3}))
-                .on('mouseleave', () => gsap.to('#ring', {scale: 1, backgroundColor: 'transparent', duration: .3}));
-            $(document).on('mousedown', () => gsap.to('#ring', {scale: .7, duration: .15})).on('mouseup', () => gsap.to('#ring', {scale: 1, duration: .3, ease: 'back.out(3)'}));
-
-            /* magnetic buttons + ripple */
-            $('.mag').on('mousemove', function (e) {
-                const r = this.getBoundingClientRect();
-                gsap.to(this, {x: (e.clientX - r.left - r.width / 2) * .25, y: (e.clientY - r.top - r.height / 2) * .35, duration: .3});
-            }).on('mouseleave', function () {gsap.to(this, {x: 0, y: 0, duration: .6, ease: 'elastic.out(1,.4)'});})
-                .on('click', function (e) {
-                    const r = this.getBoundingClientRect(), s = Math.max(r.width, r.height) * 2;
-                    const $r = $('<span class="ripple"></span>').css({width: s, height: s, left: e.clientX - r.left - s / 2, top: e.clientY - r.top - s / 2}).appendTo(this);
-                    gsap.to($r[0], {scale: 1, opacity: 0, duration: .7, onComplete: () => $r.remove()});
-                });
+            }
         });
-    </script>
-    <style>
-        /* =========================================
+
+        hero.addEventListener('mousedown', function () { ts = 0.7; });
+        hero.addEventListener('mouseup', function (e) {
+            var onLink = !!(e.target.closest && e.target.closest('a, button, .btn'));
+            ts = onLink ? 1.9 : 1;
+        });
+
+        // tab change / window se bahar jaye to hide
+        document.addEventListener('mouseleave', hide);
+        window.addEventListener('blur', hide);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+<script>
+$(function () {
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const $hero = $('#hero');
+
+    /* entrance */
+    if (!still) {
+        gsap.from('.rv',  {opacity: 0, scale: .85, y: 30, duration: 1, stagger: .06, ease: 'back.out(1.4)'});
+        gsap.from('.rv2', {opacity: 0, y: 40, duration: .9, stagger: .15, delay: .4, ease: 'power3.out'});
+
+        /* idle motion */
+        $('.fl').each(function (i) {
+            gsap.to(this, {y: (i % 2 ? -1 : 1) * (10 + i % 4 * 4), x: (i % 3 - 1) * 8, duration: 2.6 + (i % 4) * .5, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: i * .15});
+        });
+        $('.bub').each(function (i) {
+            gsap.fromTo(this, {opacity: 0, scale: .4}, {opacity: 1, scale: 1, duration: 1.6 + (i % 4) * .5, repeat: -1, yoyo: true, repeatDelay: .3, ease: 'sine.inOut', delay: i * .25});
+        });
+        gsap.to('.spin', {rotation: 12, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut'});
+        gsap.set('#lamp', {transformOrigin: '51% 0'});
+        gsap.fromTo('#lamp', {rotation: -1.8}, {rotation: 1.8, duration: 3.4, repeat: -1, yoyo: true, ease: 'sine.inOut'});
+        gsap.set('.sway', {transformOrigin: '50% 100%'});
+        gsap.to('.sway', {rotation: 2.5, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut'});
+        gsap.to('#glow', {opacity: .45, scale: 1.2, duration: 1.8, repeat: -1, yoyo: true, ease: 'sine.inOut'});
+        gsap.to('#cone', {opacity: .6, duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut'});
+        $('.star').each(function (i) {
+            gsap.to(this, {opacity: .15, scale: .5, duration: 1 + i * .35, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: i * .3});
+        });
+    }
+
+    /* mouse parallax (purane GSAP par bhi chalega) */
+    function quick(el, prop) {
+        if (gsap.quickTo) return gsap.quickTo(el, prop, {duration: 1.2, ease: 'power3'});
+        return function (v) {
+            gsap.to(el, {[prop]: v, duration: 1.2, ease: 'power3', overwrite: 'auto'});
+        };
+    }
+
+    const layers = $('.px').map(function () {
+        return {el: this, d: +$(this).data('d'), x: quick(this, 'x'), y: quick(this, 'y')};
+    }).get();
+
+    $hero.on('mousemove', function (e) {
+        if (still) return;
+        const nx = e.clientX / innerWidth - .5;
+        const ny = (e.clientY - this.getBoundingClientRect().top) / this.offsetHeight - .5;
+        layers.forEach(l => {l.x(-nx * l.d * 2); l.y(-ny * l.d * 2);});
+    }).on('mouseleave', () => layers.forEach(l => {l.x(0); l.y(0);}));
+
+    /* magnetic buttons + ripple */
+    $('.mag').on('mousemove', function (e) {
+        const r = this.getBoundingClientRect();
+        gsap.to(this, {x: (e.clientX - r.left - r.width / 2) * .25, y: (e.clientY - r.top - r.height / 2) * .35, duration: .3});
+    }).on('mouseleave', function () {
+        gsap.to(this, {x: 0, y: 0, duration: .6, ease: 'elastic.out(1,.4)'});
+    }).on('click', function (e) {
+        const r = this.getBoundingClientRect(), s = Math.max(r.width, r.height) * 2;
+        const $r = $('<span class="ripple"></span>').css({width: s, height: s, left: e.clientX - r.left - s / 2, top: e.clientY - r.top - s / 2}).appendTo(this);
+        gsap.to($r[0], {scale: 1, opacity: 0, duration: .7, onComplete: () => $r.remove()});
+    });
+});
+</script>
+ <style>
+/* =========================================
    THE GHOSTWRITING WORLD - HERO
-   Fully Scoped CSS - Only Hero Section
 ========================================= */
+#hero {
+    --u: calc(100vw / 1488);
+    --gold: #c8a36a;
+    --peach: #f4c98f;
 
-        #hero {
-            --u: calc(100vw / 1488);
-            --gold: #c8a36a;
-            --peach: #f4c98f;
+    position: relative;
+    overflow: hidden;
+    height: max(560px, calc(var(--u) * 718));
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(ellipse at 30% 40%, #dabeff 0%, #ab6af9 45%, #7b3fd6 100%);
+}
 
-            position: relative;
-            overflow: hidden;
-            height: max(560px, calc(var(--u) * 718));
-            font-family: 'Poppins', sans-serif;
-            background: radial-gradient(ellipse at 30% 40%,
-                    #dabeff 0%,
-                    #ab6af9 45%,
-                    #7b3fd6 100%);
-        }
+/* Border */
+#hero::before,
+#hero::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(200, 163, 106, .75);
+    pointer-events: none;
+    z-index: 20;
+    border-radius: 26px 0 0 0;
+}
+#hero::before { inset: 8px; }
+#hero::after  { inset: 16px; border-color: rgba(200, 163, 106, .35); }
 
-        /* Border */
-        #hero::before,
-        #hero::after {
-            content: "";
-            position: absolute;
-            border: 1px solid rgba(200, 163, 106, .75);
-            pointer-events: none;
-            z-index: 20;
-            border-radius: 26px 0 0 0;
-        }
+/* Floating Elements */
+#hero .s {
+    position: absolute;
+    left: calc(var(--x) * var(--u));
+    top: calc(var(--y) * var(--u));
+    width: calc(var(--w) * var(--u));
+}
+#hero .s img {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+}
 
-        #hero::before {
-            inset: 8px;
-        }
+/* Stage */
+#hero .stage {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: calc(var(--u) * 740);
+}
+#hero .room { position: absolute; overflow: visible; }
+#hero .room .star {
+    position: absolute;
+    color: #ffd98a;
+    font-size: calc(var(--u) * 16);
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 8px #ffd98a;
+    pointer-events: none;
+}
 
-        #hero::after {
-            inset: 16px;
-            border-color: rgba(200, 163, 106, .35);
-        }
+/* Book Glow */
+#hero .bookglow {
+    position: absolute;
+    left: 50.1%;
+    top: 58.7%;
+    width: 18%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 240, 200, .95), rgba(255, 220, 150, .35) 45%, transparent 70%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
 
-        /* Floating Elements */
-        #hero .s {
-            position: absolute;
-            left: calc(var(--x) * var(--u));
-            top: calc(var(--y) * var(--u));
-            width: calc(var(--w) * var(--u));
-        }
+/* Light cone */
+#hero .lightcone {
+    position: absolute;
+    left: calc(var(--u) * 277);
+    top: calc(var(--u) * 170);
+    width: calc(var(--u) * 330);
+    height: calc(var(--u) * 420);
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at 50% 0, rgba(255, 215, 140, .35), transparent 70%);
+    clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
 
-        #hero .s img {
-            display: block;
-            width: 100%;
-            height: auto;
-            pointer-events: none;
-            user-select: none;
-        }
+/* Lamp cord */
+#hero .cord {
+    position: absolute;
+    left: calc(var(--u) * 277);
+    top: 0;
+    width: 2px;
+    height: calc(var(--u) * 66);
+    background: var(--gold);
+}
 
-        /* Stage */
-        #hero .stage {
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: calc(var(--u) * 740);
-        }
-
-        #hero .room {
-            position: absolute;
-            overflow: visible;
-        }
-
-        #hero .room .star {
-            position: absolute;
-            color: #ffd98a;
-            font-size: calc(var(--u) * 16);
-            transform: translate(-50%, -50%);
-            text-shadow: 0 0 8px #ffd98a;
-            pointer-events: none;
-        }
-
-        /* Book Glow */
-        #hero .bookglow {
-            position: absolute;
-            left: 50.1%;
-            top: 58.7%;
-            width: 18%;
-            aspect-ratio: 1;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            background: radial-gradient(circle,
-                    rgba(255, 240, 200, .95),
-                    rgba(255, 220, 150, .35) 45%,
-                    transparent 70%);
-            mix-blend-mode: screen;
-            pointer-events: none;
-        }
-
-        /* Light Effects */
-        #hero .lightcone {
-            position: absolute;
-            left: calc(var(--u) * 277);
-            top: calc(var(--u) * 170);
-            width: calc(var(--u) * 330);
-            height: calc(var(--u) * 420);
-            transform: translateX(-50%);
-            background: radial-gradient(ellipse at 50% 0,
-                    rgba(255, 215, 140, .35),
-                    transparent 70%);
-            clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
-            pointer-events: none;
-            mix-blend-mode: screen;
-        }
-
-        /* Lamp Cord */
-        #hero .cord {
-            position: absolute;
-            left: calc(var(--u) * 277);
-            top: 0;
-            width: 2px;
-            height: calc(var(--u) * 66);
-            background: var(--gold);
-        }
-
-        /* Content */
-        #hero .content {
-            position: absolute;
-            left: calc(var(--u) * 780);
-            top: calc(var(--u) * 205);
-            width: calc(var(--u) * 650);
-            z-index: 5;
-        }
-
-        #hero .content h1 {
-            text-shadow: 0 2px 12px rgba(60, 20, 110, .35);
-            margin: 0;
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: .3px;
-            font-size: max(22px, calc(var(--u) * 41));
-        }
-
-        #hero .content h1 .g {
-            color: #ffe3a3;
-            display: block;
-        }
-
-        #hero .content h1 .w {
-            color: #fff;
-            display: block;
-                font-size: 2rem;
-        }
-
-        #hero .content p {
-          color: #fff3dc;
+/* Content */
+#hero .content {
+    position: absolute;
+    left: calc(var(--u) * 780);
+    top: calc(var(--u) * 205);
+    width: calc(var(--u) * 650);
+    z-index: 5;
+}
+#hero .content h1 {
+    text-shadow: 0 2px 12px rgba(60, 20, 110, .35);
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: .3px;
+    font-size: max(22px, calc(var(--u) * 41));
+}
+#hero .content h1 .g { color: #ffe3a3; display: block; }
+#hero .content h1 .w { color: #fff; display: block; font-size: 2rem; }
+#hero .content p {
+    color: #fff3dc;
     font-size: max(14px, calc(var(--u) * 17));
     line-height: 1.7;
     margin: calc(var(--u) * 20) 0 calc(var(--u) * 20);
-        }
+}
 
-        /* Buttons */
-        #hero .btn-gs,
-        #hero .btn-cn {
-            color: #f7d9a6;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, .35);
-            border-radius: 8px;
-            padding: .65em 3.3em;
-            font-size: max(13px, calc(var(--u) * 15));
-            box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
-            position: relative;
-            overflow: hidden;
-        }
+/* Buttons */
+#hero .btn-gs,
+#hero .btn-cn {
+    color: #f7d9a6;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 8px;
+    padding: .65em 3.3em;
+    font-size: max(13px, calc(var(--u) * 15));
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
+    position: relative;
+    overflow: hidden;
+}
+#hero .btn-gs { background: linear-gradient(#3a7bd5, #1f55b0); }
+#hero .btn-cn { background: linear-gradient(#9a58ec, #6c33c4); }
+#hero .btn-gs:hover,
+#hero .btn-cn:hover { color: #fff; }
 
-        #hero .btn-gs {
-            background: linear-gradient(#3a7bd5, #1f55b0);
-        }
+/* BBB Badge */
+#hero .badge-bbb {
+    display: block;
+    width: max(130px, calc(var(--u) * 185));
+    margin-top: calc(var(--u) * 14);
+}
 
-        #hero .btn-cn {
-            background: linear-gradient(#9a58ec, #6c33c4);
-        }
+/* Other */
+#hero .far { pointer-events: none; }
+#hero .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .45);
+    transform: scale(0);
+    pointer-events: none;
+}
+#hero .booktxt .rv { position: relative; }
+#hero .booktitle {
+    position: absolute;
+    left: 7%;
+    top: 63%;
+    width: 71%;
+    height: 32%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font: 700 calc(var(--u) * 8.5)/1 Georgia, 'Times New Roman', serif;
+    letter-spacing: .08em;
+    color: #f6d98f;
+    text-shadow: 0 1px 1px #2a0f4e, 0 0 4px rgba(255, 217, 138, .5);
+    pointer-events: none;
+}
 
-        #hero .btn-gs:hover,
-        #hero .btn-cn:hover {
-            color: #fff;
-        }
+/* =========================================
+   CUSTOM CURSOR (JS body mein elements banata hai, isliye #hero scope nahi)
+========================================= */
+.gw-dot,
+.gw-ring {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    opacity: 0;
+    will-change: transform;
+    transition: opacity .2s ease;
+}
+.gw-dot {
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    background: #c8a36a;
+    z-index: 2147483647;
+}
+.gw-ring {
+    width: 38px;
+    height: 38px;
+    margin: -19px 0 0 -19px;
+    border: 1.5px solid #c8a36a;
+    background-color: rgba(200, 163, 106, 0);
+    z-index: 2147483646;
+    transition: opacity .2s ease, background-color .3s ease;
+}
+.gw-ring.gw-ring-hover { background-color: rgba(200, 163, 106, .18); }
 
-        /* BBB Badge */
-        #hero .badge-bbb {
-            display: block;
-            width: max(130px, calc(var(--u) * 185));
-            margin-top: calc(var(--u) * 14);
-        }
+.gw-spark {
+    position: fixed;
+    z-index: 2147483645;
+    pointer-events: none;
+    color: #ffd98a;
+    text-shadow: 0 0 6px #ffd98a;
+    font-size: 14px;
+    line-height: 1;
+}
 
-        /* Other Effects */
-        #hero .far {
-            pointer-events: none;
-        }
+/* asli cursor tabhi hide hota hai jab custom cursor active ho */
+#hero.gw-cursor-on,
+#hero.gw-cursor-on * {
+    cursor: none !important;
+}
 
-        #hero .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, .45);
-            transform: scale(0);
-            pointer-events: none;
-        }
+/* Responsive */
+@media (max-width: 991.98px) {
+    #hero {
+        --u: calc(100vw / 700);
+        height: auto;
+        padding-bottom: 40px;
+    }
+    #hero .stage {
+        position: relative;
+        width: 100%;
+        height: calc(var(--u) * 640);
+    }
+    #hero .content {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: auto;
+        padding: 0 28px;
+        text-align: center;
+    }
+    #hero .content .d-flex { justify-content: center; }
+    #hero .badge-bbb { margin-inline: auto; }
+    #hero .far { display: none; }
+    #hero .content h1 { font-size: clamp(22px, 6vw, 34px); }
+    #hero .content p { font-size: 15px; line-height: 1.8; }
+}
+</style>
+    <section class="section-service d-none">
+        <div class="container">
+            <div class="head-1">
+                <h2>Our Services</h2>
+                <p>
+                    Comprehensive Accounting Support for Franchises
+                </p>
+                <span class="span-5">Franchise</span>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-11">
+                    <div class="row">
 
-        #hero .booktxt .rv {
-            position: relative;
-        }
+                        <div class="col-lg-4" data-aos="fade-right">
+                            <div class="content-box">
+                                <figure>
+                                    <img src="images/icon-1.png" class="img-fluid" alt="">
+                                    <span class="span-4">01</span>
+                                </figure>
+                                <div class="content">
+                                    <h3>Bookkeeping Services</h3>
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of the
+                                        printing and typesetting industry. Lorem
+                                        Ipsum has been the industry's r
+                                    </p>
+                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
 
-        #hero .booktitle {
-            position: absolute;
-            left: 7%;
-            top: 63%;
-            width: 71%;
-            height: 32%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-            font: 700 calc(var(--u) * 8.5)/1 Georgia, 'Times New Roman', serif;
-            letter-spacing: .08em;
-            color: #f6d98f;
-            text-shadow: 0 1px 1px #2a0f4e, 0 0 4px rgba(255, 217, 138, .5);
-            pointer-events: none;
-        }
+                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
+                            <div class="content-box">
+                                <figure>
+                                    <img src="images/icon-2.png" class="img-fluid" alt="">
+                                    <span class="span-4">02</span>
+                                </figure>
+                                <div class="content">
+                                    <h3>Sales Tax Filings</h3>
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of the
+                                        printing and typesetting industry. Lorem
+                                        Ipsum has been the industry's r
+                                    </p>
+                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
 
-        /* Custom Cursor */
-        #hero .cur-dot,
-        #hero .cur-ring {
-            position: fixed;
-            left: 0;
-            top: 0;
-            pointer-events: none;
-            z-index: 9999;
-            border-radius: 50%;
-            display: none;
-        }
+                        <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
+                            <div class="content-box">
+                                <figure>
+                                    <img src="images/icon-3.png" class="img-fluid" alt="">
+                                    <span class="span-4">03</span>
+                                </figure>
+                                <div class="content">
+                                    <h3>Audit Assistance</h3>
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of the
+                                        printing and typesetting industry. Lorem
+                                        Ipsum has been the industry's r
+                                    </p>
+                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
 
-        #hero .cur-dot {
-            width: 8px;
-            height: 8px;
-            margin: -4px 0 0 -4px;
-            background: var(--gold);
-        }
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                            <div class="content-box">
+                                <figure>
+                                    <img src="images/icon-4.png" class="img-fluid" alt="">
+                                    <span class="span-4">04</span>
+                                </figure>
+                                <div class="content">
+                                    <h3>Reconciliation of all Funds</h3>
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of the
+                                        printing and typesetting industry. Lorem
+                                        Ipsum has been the industry's r
+                                    </p>
+                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
 
-        #hero .cur-ring {
-            width: 38px;
-            height: 38px;
-            margin: -19px 0 0 -19px;
-            border: 1.5px solid var(--gold);
-        }
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+                            <div class="content-box">
+                                <figure>
+                                    <img src="images/icon-5.png" class="img-fluid" alt="">
+                                    <span class="span-4">05</span>
+                                </figure>
+                                <div class="content">
+                                    <h3>PL Review & Guidance</h3>
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of the
+                                        printing and typesetting industry. Lorem
+                                        Ipsum has been the industry's r
+                                    </p>
+                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
 
-        #hero .spark {
-            position: fixed;
-            z-index: 9998;
-            pointer-events: none;
-            color: #ffd98a;
-            text-shadow: 0 0 6px #ffd98a;
-            font-size: 14px;
-            line-height: 1;
-        }
+                    </div>
+                </div>
+                <div class="btn-style">
+                    <a href="services.php" class="themeBtn">View All Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        
+/* Default Card */
+.section-service .content-box {
+  padding: 2.8rem 2rem;
+  background: #fff;
+  box-shadow: 1px 2px 7px #e3d9d9;
+  margin: 0 0rem 3rem;
+  border-radius: 10px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+      height: -webkit-fill-available;
+}
 
-        /* Cursor Desktop */
-        @media (pointer: fine) {
+.section-service .content-box figure {
+  display: flex;
+  justify-content: space-between;
+}
 
-            #hero.has-cursor,
-            #hero.has-cursor * {
-                cursor: none !important;
-            }
+.section-service .content-box figure img {
+  transition: all 0.4s ease;
+}
 
-            #hero .cur-dot,
-            #hero .cur-ring {
-                display: block;
-            }
-        }
+.section-service .content-box figure .span-4 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #f1f1f1;
+  transition: all 0.4s ease;
+}
 
-        /* Responsive */
-        @media (max-width: 991.98px) {
+.section-service .content-box h3 {
+  font-size: 1.9rem;
+  padding: 2.2rem 0 0.6rem;
+  position: relative;
+  transition: all 0.4s ease;
+}
 
-            #hero {
-                --u: calc(100vw / 700);
-                height: auto;
-                padding-bottom: 40px;
-            }
+.section-keeping h2::before,
+.section-service .content-box h3::before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background: #56c5bf78;
+  top: 19px;
+  left: 0;
+  transition: all 0.4s ease;
+}
 
-            #hero .stage {
-                position: relative;
-                width: 100%;
-                height: calc(var(--u) * 640);
-            }
+.section-service .content-box p {
+  transition: all 0.4s ease;
+}
 
-            #hero .content {
-                position: relative;
-                left: auto;
-                top: auto;
-                width: auto;
-                padding: 0 28px;
-                text-align: center;
-            }
+.section-service .content-box i {
+  padding: 1.2rem 0 0;
+  font-size: 1.9rem;
+  display: block;
+  color: var(--primary);
+  transition: all 0.4s ease;
+}
 
-            #hero .content .d-flex {
-                justify-content: center;
-            }
+/* Default First Card Active */
+.section-service .col-lg-4:first-child .content-box {
+  background: var(--secondary);
+  transform: translateY(-8px);
+}
 
-            #hero .badge-bbb {
-                margin-inline: auto;
-            }
+/* Hover Card */
+.section-service .content-box:hover {
+  background: var(--secondary);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
 
-            #hero .far {
-                display: none;
-            }
+/* White Text */
+.section-service .col-lg-4:first-child .content-box h3,
+.section-service .col-lg-4:first-child .content-box p,
+.section-service .col-lg-4:first-child .content-box .span-4,
+.section-service .col-lg-4:first-child .content-box i,
+.section-service .content-box:hover h3,
+.section-service .content-box:hover p,
+.section-service .content-box:hover .span-4,
+.section-service .content-box:hover i {
+  color: #fff;
+}
 
-            #hero .content h1 {
-                font-size: clamp(22px, 6vw, 34px);
-            }
+/* White Image */
+.section-service .col-lg-4:first-child .content-box img,
+.section-service .content-box:hover img {
+  filter: brightness(0) invert(1);
+}
 
-            #hero .content p {
-                font-size: 15px;
-                line-height: 1.8;
-            }
-        }
+/* Heading Line */
+.section-service .col-lg-4:first-child .content-box h3::before,
+.section-service .content-box:hover h3::before {
+  background: #fff;
+  width: 110px;
+}
+
+/* Remove First Card Active When Another Card Hover */
+.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box {
+  background: #fff;
+  transform: none;
+  box-shadow: 1px 2px 7px #e3d9d9;
+}
+
+.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box h3,
+.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box p,
+.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box .span-4 {
+  color: initial;
+}
+
+.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box i {
+  color: var(--primary);
+}
+
+.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box img {
+  filter: none;
+}
+
+.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box h3::before {
+  background: #56c5bf78;
+  width: 80px;
+}
+
     </style>
     <!-- End SaaS Main Banner -->
     <!-- Start Features Area -->
@@ -1089,40 +1355,36 @@
     <script>
         (function () {
             const allImages = [
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Black-and-White-Minimalist-Simple-Modern-Text-Thriller-Mystery-Book-Cover_20260904_154224_0000.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Black-and-White-Minimalist-Mystery-Detective-Novel-Fiction-Book-Cover-_20260904_155041_0000.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Black-and-White-Ballet-Book-Cover_20260904_154005_0000-1.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Beige-And-Black-Simple-Science-Fiction-Book-Cover_20260904_154124_0000.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Blue-Retro-Novel-Book-Cover_20260904_155707_0000.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Blue-Pink-and-Orange-Modern-Romantic-Novel-Book-Cover_20260904_155333_0000.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Blue-Green-Minimal-Modern-Summer-Breeze-Photo-Sheep-Book-Cover_20260904_154052_0000.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Black-Yellow-Rusty-Horror-Novel-Book-Cover_20260904_155242_0000.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Black-Red-Bold-Spooky-Mystery-Novel-Book-Cover_20260904_154200_0000-1.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Black-Mystery-Novel-Book-Cover_20260904_154653_0000.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/Black-Red-Bold-Spooky-Mystery-Novel-Book-Cover_20260904_154200_0000.png",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.33.30-PM-1.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.25-PM.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.26-PM.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.26-PM-1.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.26-PM-2.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.27-PM.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.27-PM-1.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.28-PM.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.28-PM-1.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.28-PM-2.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.29-PM.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.29-PM-1.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.29-PM-2.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.29-PM-3.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.30-PM.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.32.30-PM-1.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.33.04-PM.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.33.04-PM-1.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.33.05-PM.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.33.05-PM-1.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.33.05-PM-2.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.33.05-PM-3.jpeg",
-                "https://theghostwritingworld.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-09-at-5.33.30-PM.jpeg"
+                "images/cover-1.webp",
+                "images/cover-2.webp",
+                "images/cover-3.webp",
+                "images/cover-4.webp",
+                 "images/cover-5.webp",
+                "images/cover-6.webp",
+                "images/cover-7.webp",
+                "images/cover-8.webp",
+                 "images/cover-9.webp",
+                "images/cover-10.webp",
+                "images/cover-11.webp",
+                "images/cover-12.webp",
+                 "images/cover-13.webp",
+                "images/cover-14.webp",
+                "images/cover-15.webp",
+                "images/cover-16.webp",
+                 "images/cover-17.webp",
+                "images/cover-18.webp",
+                "images/cover-19.webp",
+                "images/cover-20.webp",
+                 "images/cover-21.webp",
+                "images/cover-22.webp",
+                "images/cover-23.webp",
+                "images/cover-24.webp",
+                 "images/cover-25.webp",
+                "images/cover-26.webp",
+                "images/cover-27.webp",
+                "images/cover-28.webp",
+              
+                "images/cover-29.webp"
             ];
 
             const totalCards = 28;                     // 7 columns x 4 rows
@@ -1148,7 +1410,7 @@
                 inners.push(document.getElementById('bfsInner' + i));
             }
 
-            // card flip karte waqt peeche wale side par nayi (abhi na dikhne wali) image lagti hai
+            
             function flipCard(idx) {
                 if (busy[idx]) return;
                 busy[idx] = true;
