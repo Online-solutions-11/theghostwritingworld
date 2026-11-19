@@ -1,10 +1,5 @@
 <!doctype html>
 <html lang="zxx">
-
-
-
-
-
 <head>
 
     <!-- Required meta tags -->
@@ -76,7 +71,8 @@
 
 
 
-    <title>The Ghostwriting World</title>
+    <title>Professional Ghostwriting Services | The Ghostwriting World</title>
+<meta name="description" content="Hire professional ghostwriters for your book. The Ghostwriting World offers ghostwriting, editing, publishing & marketing. Get a free quote today.">
 
 
 
@@ -105,279 +101,602 @@
         <div class="loading-line"></div>
     </div>
 
-    <style>
-        /* .demo-content { min-height:100vh; display:flex; align-items:center; justify-content:center; font-size:2rem; color:#493A7D; } */
+   
+   
+<!-- BOOTSTRAP 4 (Agar pehle se included hai to dobara add na karein) -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-        /* =========================================
-   BOOK BRAND PRELOADER  (GIF book)
-========================================= */
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-        .preloader-area {
-            --t: 1s;
-            /* <-- minimum time (GIF ka ek poora cycle 3s ka hai) */
+<header class="header-new">
 
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            transition: opacity .6s ease, visibility .6s ease;
-
-            /* thora dark gradient (wahi purple colors) */
-            background: linear-gradient(135deg,
-                    #C3A5FF 0%,
-                    #B294EE 50%,
-                    #A677F9 100%);
-        }
-
-        .preloader-area.hide {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        /* Soft background glow */
-        .preloader-area::before,
-        .preloader-area::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            filter: blur(2px);
-        }
-
-        .preloader-area::before {
-            width: 300px;
-            height: 300px;
-            top: -100px;
-            right: -70px;
-            background: rgba(115, 75, 205, 0.16);
-        }
-
-        .preloader-area::after {
-            width: 260px;
-            height: 260px;
-            bottom: -100px;
-            left: -70px;
-            background: rgba(166, 119, 249, 0.20);
-        }
-
-        /* GIF book */
-        .preloader-area .spinner {
-            position: relative;
-            width: 330px;
-            height: 275px;
-            z-index: 2;
-        }
-
-        .preloader-area .spinner img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            user-select: none;
-            -webkit-user-drag: none;
-        }
-
-        /* Shadow under the book (GIF mein soft shadow nahi ho sakta, isliye CSS se) */
-        .preloader-area .spinner::before {
-            content: "";
-            position: absolute;
-            width: 250px;
-            height: 18px;
-            bottom: 6px;
-            left: 50%;
-            margin-left: -125px;
-            border-radius: 50%;
-            background: rgba(73, 58, 125, 0.30);
-            filter: blur(10px);
-        }
-
-        /* Loading label */
-        .preloader-area .loading-text {
-            position: absolute;
-            top: calc(50% + 158px);
-            left: 0;
-            width: 100%;
-            text-align: center;
-            color: #493A7D;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        /* Loading line (3 second mein poori bharti hai) */
-        .preloader-area .loading-line {
-            position: absolute;
-            top: calc(50% + 190px);
-            left: 50%;
-            width: 130px;
-            height: 3px;
-            overflow: hidden;
-            border-radius: 10px;
-            transform: translateX(-50%);
-            background: rgba(73, 58, 125, 0.18);
-        }
-
-        .preloader-area .loading-line::after {
-            content: "";
-            display: block;
-            width: 100%;
-            height: 100%;
-            border-radius: inherit;
-            background: #734BCD;
-            transform-origin: left center;
-            transform: scaleX(0);
-        }
-
-        .preloader-area.go .loading-line::after {
-            animation: lineFill var(--t) linear forwards;
-        }
-
-        @keyframes lineFill {
-            from {
-                transform: scaleX(0);
-            }
-
-            to {
-                transform: scaleX(1);
-            }
-        }
-
-        /* Mobile */
-        @media (max-width: 576px) {
-            .preloader-area .spinner {
-                width: 270px;
-                height: 225px;
-            }
-
-            .preloader-area .spinner::before {
-                width: 200px;
-                margin-left: -100px;
-                bottom: 5px;
-            }
-
-            .preloader-area .loading-text {
-                top: calc(50% + 130px);
-                font-size: 11px;
-                letter-spacing: 3px;
-            }
-
-            .preloader-area .loading-line {
-                top: calc(50% + 158px);
-            }
-        }
-    </style>
-    <header class="custom-mobile-header">
-
-        <!-- Aapka existing header HTML yahan same rahega -->
-
-        <div class="navbar-area bg-white">
-
-            <!-- Mobile Menu Toggle -->
-            <button type="button" class="custom-menu-toggle" aria-label="Open menu" aria-expanded="false">
-                <i class="bx bx-menu"></i>
-            </button>
-
-            <!-- Existing responsive nav -->
-            <div class="strax-responsive-nav">
-                <div class="container">
-                    <div class="strax-responsive-menu">
-                        <div class="logo black-logo">
-                            <a href="index.html">
-                                <img src="assets/img/logo-up.png" alt="logo">
-                            </a>
-                        </div>
-                        <div class="logo white-logo">
-                            <a href="index.html">
-                                <img src="assets/img/logo-up.png" alt="logo">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Existing desktop nav -->
-            <div class="strax-nav">
-                <div class="container">
-                    <nav class="navbar navbar-expand-md navbar-light">
-
-                        <a class="navbar-brand black-logo" href="index.html">
-                            <img src="assets/img/logo-up.png" alt="logo">
-                        </a>
-
-                        <a class="navbar-brand white-logo" href="index.html">
-                            <img src="assets/img/logo-up.png" alt="logo">
-                        </a>
-
-                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-
-                            <ul id="navMenus" class="navbar-nav">
-                                <li class="nav-item">
-                                    <a href="index.html" class="nav-link home">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="about.html" class="nav-link about">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="services.html" class="nav-link services">Services</a>
-                                </li>
-                                <!-- <li class="nav-item">
-                                <a href="#" class="nav-link">Testimonials</a>
-                            </li> -->
-                                <li class="nav-item">
-                                    <a href="contact.html" class="nav-link contact">Contact</a>
-                                </li>
-                            </ul>
-
-                            <div class="others-options">
-                                <a href="javascript:;" class="default-btn popup-show">
-                                    <i class="bx bxs-hot"></i>Get Started<span></span>
-                                </a>
-                            </div>
-
-                        </div>
-                    </nav>
-                </div>
-            </div>
-
-            <!-- Existing responsive Get Started button -->
-            <div class="others-option-for-responsive">
-                <div class="container">
-                    <div class="dot-menu">
-                        <a href="javascript:;" class="default-btn res popup-show">
-                            Get Started<span></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+    <!-- TOP ANNOUNCEMENT TICKER -->
+    <div class="header-new-ticker">
+        <div class="header-new-ticker-track">
+            <span>50% Off On All Services – Ends Jan 1, 2027</span>
+            <span>50% Off On All Services – Ends Jan 1, 2027</span>
+            <span>50% Off On All Services – Ends Jan 1, 2027</span>
+            <span>50% Off On All Services – Ends Jan 1, 2027</span>
         </div>
+    </div>
 
-        <!-- Overlay -->
-        <div class="custom-menu-overlay"></div>
+    <!-- MAIN HEADER -->
+    <div class="header-new-main">
+        <div class="container">
 
-        <!-- Mobile drawer -->
-        <div class="custom-mobile-drawer" id="customMobileDrawer">
+            <div class="header-new-inner">
 
-            <button type="button" class="custom-menu-close" aria-label="Close menu">
-                &times;
-            </button>
+                <!-- LOGO -->
+                <a href="/" class="header-new-logo">
+                    <img src="assets/img/logo-up.png" alt="The Ghostwriting World">
+                </a>
 
-            <!-- Menu links JavaScript se existing nav se copy honge -->
-            <div class="custom-mobile-links"></div>
+                <!-- MOBILE TOGGLE -->
+                <button class="header-new-toggle"
+                        type="button"
+                        aria-label="Open menu"
+                        aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-            <a href="javascript:;" class="default-btn popup-show custom-drawer-cta">
-                Get Started <span></span>
-            </a>
+                <!-- OVERLAY -->
+                <div class="header-new-overlay"></div>
 
+                <!-- NAVIGATION -->
+                <nav class="header-new-nav">
+
+                    <div class="header-new-mobile-top">
+                        <span>MENU</span>
+
+                        <button class="header-new-close" type="button" aria-label="Close menu">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+
+                    <!-- MOBILE CTA -->
+                    <a href="javascript:;" 
+                     class="header-new-mobile-cta popup-show">
+                        <i class="fas fa-fire"></i> Get Started
+                    </a>
+
+
+                </nav>
+
+                <!-- DESKTOP CTA -->
+                <div class="header-new-action">
+                    <a href="javascript:;" class="popup-show">
+                        <i class="fas fa-fire"></i>
+                        Get Started
+                    </a>
+                </div>
+
+            </div>
         </div>
+    </div>
 
-    </header>
+</header>
+<style>
 
+/* =====================================================
+   THE GHOSTWRITING WORLD - COMPLETE HEADER
+   Bootstrap 4 Compatible
+   Scoped CSS: .header-new
+===================================================== */
+
+.header-new,
+.header-new * {
+    box-sizing: border-box;
+}
+
+.header-new {
+    width: 100%;
+    position: relative;
+    z-index: 999;
+    background: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* =====================================================
+   TOP ANNOUNCEMENT TICKER
+===================================================== */
+
+.header-new .header-new-ticker {
+      width: 100%;
+    overflow: hidden;
+    background: linear-gradient(90deg, #bb87fb05, #ffffff);
+    padding: 9px 0;
+    color: #000;
+    white-space: nowrap;
+}
+
+.header-new .header-new-ticker-track {
+    display: flex;
+    width: max-content;
+    animation: headerNewTicker 22s linear infinite;
+}
+
+.header-new .header-new-ticker-track span {
+      flex-shrink: 0;
+    display: inline-block;
+    padding: 0 40px;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: .4px;
+}
+
+.header-new .header-new-ticker:hover .header-new-ticker-track {
+    animation-play-state: paused;
+}
+
+@keyframes headerNewTicker {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* =====================================================
+   MAIN HEADER
+===================================================== */
+
+.header-new .header-new-main {
+    width: 100%;
+    min-height: 105px;
+    background: #fff;
+    border-bottom: 1px solid #f5f5f5;
+    position: relative;
+    z-index: 999;
+    transition: box-shadow .3s ease, background .3s ease;
+}
+
+.header-new .header-new-inner {
+    min-height: 105px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.header-new .header-new-logo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.header-new .header-new-logo img {
+    width: 335px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =====================================================
+   DESKTOP NAVIGATION
+===================================================== */
+
+.header-new .header-new-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-new .header-new-nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 25px;
+}
+
+.header-new .header-new-nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+.header-new .header-new-nav ul li a {
+    font-size: 13px;
+    font-weight: 400;
+    color: #294c70;
+    text-decoration: none;
+    transition: .3s ease;
+}
+
+.header-new .header-new-nav ul li a:hover {
+    color: #f04491;
+}
+
+/* =====================================================
+   GET STARTED BUTTON
+===================================================== */
+
+.header-new .header-new-action a,
+.header-new .header-new-mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: linear-gradient(90deg, #ed4388, #ff91c3);
+    color: #fff;
+    text-decoration: none;
+    padding: 13px 22px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .3s ease;
+}
+
+.header-new .header-new-action a:hover,
+.header-new .header-new-mobile-cta:hover {
+    color: #fff;
+    opacity: .85;
+}
+
+/* =====================================================
+   HIDE MOBILE ELEMENTS ON DESKTOP
+===================================================== */
+
+.header-new .header-new-toggle,
+.header-new .header-new-close,
+.header-new .header-new-overlay,
+.header-new .header-new-mobile-top,
+.header-new .header-new-mobile-cta {
+    display: none;
+}
+
+/* =====================================================
+   STICKY HEADER AFTER 100PX
+===================================================== */
+
+.header-new.header-new-sticky .header-new-main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+    animation: headerNewSlideDown .35s ease forwards;
+}
+
+@keyframes headerNewSlideDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Prevent page jumping when header becomes fixed */
+
+.header-new.header-new-sticky {
+    padding-bottom: 105px;
+}
+
+/* =====================================================
+   TABLET & MOBILE
+===================================================== */
+
+@media (max-width: 991px) {
+
+    .header-new .header-new-main {
+        min-height: 80px;
+    }
+
+    .header-new .header-new-inner {
+        min-height: 80px;
+    }
+
+    .header-new .header-new-logo img {
+        width: 240px;
+    }
+
+    /* MOBILE TOGGLE */
+
+    .header-new .header-new-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 43px;
+        height: 43px;
+        border: none;
+        background: #f04491;
+        color: #fff;
+        font-size: 21px;
+        border-radius: 4px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .header-new .header-new-action {
+        display: none;
+    }
+
+    /* OVERLAY */
+
+    .header-new .header-new-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, .5);
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s ease;
+        z-index: 9998;
+    }
+
+    /* LEFT SLIDE MENU */
+
+    .header-new .header-new-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 290px;
+        max-width: 85%;
+        height: 100vh;
+        height: 100dvh;
+        background: #fff;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: 0 25px 30px;
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform .35s ease;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, .08);
+    }
+
+    /* MOBILE MENU TOP */
+
+    .header-new .header-new-mobile-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px 0;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #222;
+    }
+
+    .header-new .header-new-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        background: #f04491;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 19px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    /* MOBILE LINKS */
+
+    .header-new .header-new-nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: 100%;
+    }
+
+    .header-new .header-new-nav ul li {
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+
+    .header-new .header-new-nav ul li a {
+        display: block;
+        padding: 15px 0;
+        font-size: 15px;
+        color: #294c70;
+    }
+
+    .header-new .header-new-nav ul li a:hover {
+        color: #f04491;
+        padding-left: 7px;
+    }
+
+    /* MOBILE CTA */
+
+    .header-new .header-new-mobile-cta {
+        display: flex;
+        margin-top: 25px;
+        width: 100%;
+        padding: 14px;
+    }
+
+    /* MENU OPEN */
+
+    .header-new.menu-open .header-new-nav {
+        transform: translateX(0);
+    }
+
+    .header-new.menu-open .header-new-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .header-new.menu-open .header-new-toggle {
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    /* BODY SCROLL LOCK */
+
+    body.header-new-menu-open {
+        overflow: hidden;
+    }
+
+    /* STICKY SPACING */
+
+    .header-new.header-new-sticky {
+        padding-bottom: 80px;
+    }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 575px) {
+
+    .header-new .header-new-main {
+        min-height: 72px;
+    }
+
+    .header-new .header-new-inner {
+        min-height: 72px;
+    }
+
+    .header-new .header-new-logo img {
+        width: 285px;
+    }
+
+    .header-new .header-new-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 19px;
+    }
+
+    .header-new .header-new-ticker {
+        padding: 8px 0;
+    }
+
+    .header-new .header-new-ticker-track span {
+        font-size: 12px;
+        padding: 0 25px;
+    }
+
+    .header-new.header-new-sticky {
+        padding-bottom: 72px;
+    }
+}
+
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .header-new .header-new-ticker-track {
+        animation-duration: 60s;
+    }
+
+    .header-new .header-new-nav,
+    .header-new .header-new-overlay {
+        transition: none;
+    }
+}
+
+</style>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const header = document.querySelector(".header-new");
+
+    if (!header) return;
+
+    const toggle = header.querySelector(".header-new-toggle");
+    const closeBtn = header.querySelector(".header-new-close");
+    const overlay = header.querySelector(".header-new-overlay");
+    const navLinks = header.querySelectorAll(".header-new-nav ul li a");
+
+    function openMenu() {
+        header.classList.add("menu-open");
+        document.body.classList.add("header-new-menu-open");
+
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Close menu");
+        toggle.innerHTML = '<i class="fas fa-times"></i>';
+    }
+
+    function closeMenu() {
+        header.classList.remove("menu-open");
+        document.body.classList.remove("header-new-menu-open");
+
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open menu");
+        toggle.innerHTML = '<i class="fas fa-bars"></i>';
+    }
+
+    toggle.addEventListener("click", function () {
+
+        if (header.classList.contains("menu-open")) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+
+    });
+
+    closeBtn.addEventListener("click", closeMenu);
+
+    overlay.addEventListener("click", closeMenu);
+
+    navLinks.forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+    });
+
+    // Body click outside menu closes it
+    document.addEventListener("click", function (e) {
+
+        if (
+            header.classList.contains("menu-open") &&
+            !header.contains(e.target)
+        ) {
+            closeMenu();
+        }
+
+    });
+
+    // Escape key closes menu
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            closeMenu();
+        }
+    });
+
+});
+
+
+const stickyHeader = document.querySelector(".header-new");
+
+window.addEventListener("scroll", function () {
+    if (window.scrollY > 100) {
+        stickyHeader.classList.add("header-new-sticky");
+    } else {
+        stickyHeader.classList.remove("header-new-sticky");
+    }
+}, { passive: true });
+
+
+</script>
 
     <style type="text/css">
         .align-centered {
@@ -413,37 +732,6 @@
 
     </div>
 
-
-
-    <!-- Start Preloader Area -->
-
-    <!-- <div class="preloader-area">
-
-        <div class="spinner">
-
-            <div class="inner">
-
-                <div class="disc"></div>
-
-                <div class="disc"></div>
-
-                <div class="disc"></div>
-
-            </div>
-
-        </div>
-
-    </div> -->
-
-    <!-- End Preloader Area -->
-
-
-
-    <!-- Start Navbar Area -->
-
-
-
-    <!-- End Navbar Area -->
 
     <script type="text/javascript">
         //     $("#navMenus").on('click','li',function(){
@@ -592,664 +880,8 @@
  </section>
 <div class="cur-dot" id="dot"></div>
 <div class="cur-ring" id="ring"></div>
-<script>
-(function () {
-    function init() {
-        var hero = document.getElementById('hero');
-        if (!hero) return;
 
-        // touch-only devices par custom cursor nahi
-        if (window.matchMedia('(hover: none)').matches) return;
-
-        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        var ring = document.createElement('div');
-        var dot  = document.createElement('div');
-        ring.className = 'gw-ring';
-        dot.className  = 'gw-dot';
-        document.body.appendChild(ring);
-        document.body.appendChild(dot);
-
-        var mx = -100, my = -100;      // mouse
-        var rx = -100, ry = -100;      // ring (smooth follow)
-        var rs = 1, ts = 1;            // ring scale (current / target)
-        var active = false, raf = null, lastSpark = 0;
-
-        function loop() {
-            rx += (mx - rx) * 0.18;
-            ry += (my - ry) * 0.18;
-            rs += (ts - rs) * 0.2;
-            dot.style.transform  = 'translate3d(' + mx + 'px,' + my + 'px,0)';
-            ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0) scale(' + rs + ')';
-            raf = requestAnimationFrame(loop);
-        }
-
-        function show(e) {
-            mx = rx = e.clientX;
-            my = ry = e.clientY;
-            if (active) return;
-            active = true;
-            hero.classList.add('gw-cursor-on');
-            dot.style.opacity = 1;
-            ring.style.opacity = 1;
-            if (!raf) loop();
-        }
-
-        function hide() {
-            active = false;
-            hero.classList.remove('gw-cursor-on');
-            dot.style.opacity = 0;
-            ring.style.opacity = 0;
-            ts = 1;
-            ring.classList.remove('gw-ring-hover');
-        }
-
-        function spark(x, y) {
-            var s = document.createElement('span');
-            s.className = 'gw-spark';
-            s.textContent = '✦';
-            s.style.left = (x - 7) + 'px';
-            s.style.top  = (y - 7) + 'px';
-            document.body.appendChild(s);
-            var dx = (Math.random() * 36) - 18;
-            var dy = 14 + Math.random() * 22;
-            var rot = (Math.random() * 180) - 90;
-            var anim = s.animate([
-                { transform: 'translate(0,0) scale(1) rotate(0deg)', opacity: 1 },
-                { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(0) rotate(' + rot + 'deg)', opacity: 0 }
-            ], { duration: 900, easing: 'ease-out' });
-            anim.onfinish = function () { s.remove(); };
-        }
-
-        hero.addEventListener('mouseenter', show);
-        hero.addEventListener('mouseleave', hide);
-
-        hero.addEventListener('mousemove', function (e) {
-            if (!active) show(e);
-            mx = e.clientX;
-            my = e.clientY;
-
-            // hover state on links / buttons
-            var onLink = !!(e.target.closest && e.target.closest('a, button, .btn'));
-            ts = onLink ? 1.9 : 1;
-            ring.classList.toggle('gw-ring-hover', onLink);
-
-            // sparkle trail
-            if (!reduce) {
-                var now = Date.now();
-                if (now - lastSpark > 70) {
-                    lastSpark = now;
-                    spark(e.clientX, e.clientY);
-                }
-            }
-        });
-
-        hero.addEventListener('mousedown', function () { ts = 0.7; });
-        hero.addEventListener('mouseup', function (e) {
-            var onLink = !!(e.target.closest && e.target.closest('a, button, .btn'));
-            ts = onLink ? 1.9 : 1;
-        });
-
-        // tab change / window se bahar jaye to hide
-        document.addEventListener('mouseleave', hide);
-        window.addEventListener('blur', hide);
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-})();
-</script>
-<script>
-$(function () {
-    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const $hero = $('#hero');
-
-    /* entrance */
-    if (!still) {
-        gsap.from('.rv',  {opacity: 0, scale: .85, y: 30, duration: 1, stagger: .06, ease: 'back.out(1.4)'});
-        gsap.from('.rv2', {opacity: 0, y: 40, duration: .9, stagger: .15, delay: .4, ease: 'power3.out'});
-
-        /* idle motion */
-        $('.fl').each(function (i) {
-            gsap.to(this, {y: (i % 2 ? -1 : 1) * (10 + i % 4 * 4), x: (i % 3 - 1) * 8, duration: 2.6 + (i % 4) * .5, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: i * .15});
-        });
-        $('.bub').each(function (i) {
-            gsap.fromTo(this, {opacity: 0, scale: .4}, {opacity: 1, scale: 1, duration: 1.6 + (i % 4) * .5, repeat: -1, yoyo: true, repeatDelay: .3, ease: 'sine.inOut', delay: i * .25});
-        });
-        gsap.to('.spin', {rotation: 12, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-        gsap.set('#lamp', {transformOrigin: '51% 0'});
-        gsap.fromTo('#lamp', {rotation: -1.8}, {rotation: 1.8, duration: 3.4, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-        gsap.set('.sway', {transformOrigin: '50% 100%'});
-        gsap.to('.sway', {rotation: 2.5, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-        gsap.to('#glow', {opacity: .45, scale: 1.2, duration: 1.8, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-        gsap.to('#cone', {opacity: .6, duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut'});
-        $('.star').each(function (i) {
-            gsap.to(this, {opacity: .15, scale: .5, duration: 1 + i * .35, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: i * .3});
-        });
-    }
-
-    /* mouse parallax (purane GSAP par bhi chalega) */
-    function quick(el, prop) {
-        if (gsap.quickTo) return gsap.quickTo(el, prop, {duration: 1.2, ease: 'power3'});
-        return function (v) {
-            gsap.to(el, {[prop]: v, duration: 1.2, ease: 'power3', overwrite: 'auto'});
-        };
-    }
-
-    const layers = $('.px').map(function () {
-        return {el: this, d: +$(this).data('d'), x: quick(this, 'x'), y: quick(this, 'y')};
-    }).get();
-
-    $hero.on('mousemove', function (e) {
-        if (still) return;
-        const nx = e.clientX / innerWidth - .5;
-        const ny = (e.clientY - this.getBoundingClientRect().top) / this.offsetHeight - .5;
-        layers.forEach(l => {l.x(-nx * l.d * 2); l.y(-ny * l.d * 2);});
-    }).on('mouseleave', () => layers.forEach(l => {l.x(0); l.y(0);}));
-
-    /* magnetic buttons + ripple */
-    $('.mag').on('mousemove', function (e) {
-        const r = this.getBoundingClientRect();
-        gsap.to(this, {x: (e.clientX - r.left - r.width / 2) * .25, y: (e.clientY - r.top - r.height / 2) * .35, duration: .3});
-    }).on('mouseleave', function () {
-        gsap.to(this, {x: 0, y: 0, duration: .6, ease: 'elastic.out(1,.4)'});
-    }).on('click', function (e) {
-        const r = this.getBoundingClientRect(), s = Math.max(r.width, r.height) * 2;
-        const $r = $('<span class="ripple"></span>').css({width: s, height: s, left: e.clientX - r.left - s / 2, top: e.clientY - r.top - s / 2}).appendTo(this);
-        gsap.to($r[0], {scale: 1, opacity: 0, duration: .7, onComplete: () => $r.remove()});
-    });
-});
-</script>
- <style>
-/* =========================================
-   THE GHOSTWRITING WORLD - HERO
-========================================= */
-#hero {
-    --u: calc(100vw / 1488);
-    --gold: #c8a36a;
-    --peach: #f4c98f;
-
-    position: relative;
-    overflow: hidden;
-    height: max(560px, calc(var(--u) * 718));
-    font-family: 'Poppins', sans-serif;
-    background: radial-gradient(ellipse at 30% 40%, #dabeff 0%, #ab6af9 45%, #7b3fd6 100%);
-}
-
-/* Border */
-#hero::before,
-#hero::after {
-    content: "";
-    position: absolute;
-    border: 1px solid rgba(200, 163, 106, .75);
-    pointer-events: none;
-    z-index: 20;
-    border-radius: 26px 0 0 0;
-}
-#hero::before { inset: 8px; }
-#hero::after  { inset: 16px; border-color: rgba(200, 163, 106, .35); }
-
-/* Floating Elements */
-#hero .s {
-    position: absolute;
-    left: calc(var(--x) * var(--u));
-    top: calc(var(--y) * var(--u));
-    width: calc(var(--w) * var(--u));
-}
-#hero .s img {
-    display: block;
-    width: 100%;
-    height: auto;
-    pointer-events: none;
-    user-select: none;
-}
-
-/* Stage */
-#hero .stage {
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: calc(var(--u) * 740);
-}
-#hero .room { position: absolute; overflow: visible; }
-#hero .room .star {
-    position: absolute;
-    color: #ffd98a;
-    font-size: calc(var(--u) * 16);
-    transform: translate(-50%, -50%);
-    text-shadow: 0 0 8px #ffd98a;
-    pointer-events: none;
-}
-
-/* Book Glow */
-#hero .bookglow {
-    position: absolute;
-    left: 50.1%;
-    top: 58.7%;
-    width: 18%;
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 240, 200, .95), rgba(255, 220, 150, .35) 45%, transparent 70%);
-    mix-blend-mode: screen;
-    pointer-events: none;
-}
-
-/* Light cone */
-#hero .lightcone {
-    position: absolute;
-    left: calc(var(--u) * 277);
-    top: calc(var(--u) * 170);
-    width: calc(var(--u) * 330);
-    height: calc(var(--u) * 420);
-    transform: translateX(-50%);
-    background: radial-gradient(ellipse at 50% 0, rgba(255, 215, 140, .35), transparent 70%);
-    clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
-    pointer-events: none;
-    mix-blend-mode: screen;
-}
-
-/* Lamp cord */
-#hero .cord {
-    position: absolute;
-    left: calc(var(--u) * 277);
-    top: 0;
-    width: 2px;
-    height: calc(var(--u) * 66);
-    background: var(--gold);
-}
-
-/* Content */
-#hero .content {
-    position: absolute;
-    left: calc(var(--u) * 780);
-    top: calc(var(--u) * 205);
-    width: calc(var(--u) * 650);
-    z-index: 5;
-}
-#hero .content h1 {
-    text-shadow: 0 2px 12px rgba(60, 20, 110, .35);
-    margin: 0;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: .3px;
-    font-size: max(22px, calc(var(--u) * 41));
-}
-#hero .content h1 .g { color: #ffe3a3; display: block; }
-#hero .content h1 .w { color: #fff; display: block; font-size: 2rem; }
-#hero .content p {
-    color: #fff3dc;
-    font-size: max(14px, calc(var(--u) * 17));
-    line-height: 1.7;
-    margin: calc(var(--u) * 20) 0 calc(var(--u) * 20);
-}
-
-/* Buttons */
-#hero .btn-gs,
-#hero .btn-cn {
-    color: #f7d9a6;
-    font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, .35);
-    border-radius: 8px;
-    padding: .65em 3.3em;
-    font-size: max(13px, calc(var(--u) * 15));
-    box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
-    position: relative;
-    overflow: hidden;
-}
-#hero .btn-gs { background: linear-gradient(#3a7bd5, #1f55b0); }
-#hero .btn-cn { background: linear-gradient(#9a58ec, #6c33c4); }
-#hero .btn-gs:hover,
-#hero .btn-cn:hover { color: #fff; }
-
-/* BBB Badge */
-#hero .badge-bbb {
-    display: block;
-    width: max(130px, calc(var(--u) * 185));
-    margin-top: calc(var(--u) * 14);
-}
-
-/* Other */
-#hero .far { pointer-events: none; }
-#hero .ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .45);
-    transform: scale(0);
-    pointer-events: none;
-}
-#hero .booktxt .rv { position: relative; }
-#hero .booktitle {
-    position: absolute;
-    left: 7%;
-    top: 63%;
-    width: 71%;
-    height: 32%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    font: 700 calc(var(--u) * 8.5)/1 Georgia, 'Times New Roman', serif;
-    letter-spacing: .08em;
-    color: #f6d98f;
-    text-shadow: 0 1px 1px #2a0f4e, 0 0 4px rgba(255, 217, 138, .5);
-    pointer-events: none;
-}
-
-/* =========================================
-   CUSTOM CURSOR (JS body mein elements banata hai, isliye #hero scope nahi)
-========================================= */
-.gw-dot,
-.gw-ring {
-    position: fixed;
-    left: 0;
-    top: 0;
-    pointer-events: none;
-    border-radius: 50%;
-    opacity: 0;
-    will-change: transform;
-    transition: opacity .2s ease;
-}
-.gw-dot {
-    width: 8px;
-    height: 8px;
-    margin: -4px 0 0 -4px;
-    background: #c8a36a;
-    z-index: 2147483647;
-}
-.gw-ring {
-    width: 38px;
-    height: 38px;
-    margin: -19px 0 0 -19px;
-    border: 1.5px solid #c8a36a;
-    background-color: rgba(200, 163, 106, 0);
-    z-index: 2147483646;
-    transition: opacity .2s ease, background-color .3s ease;
-}
-.gw-ring.gw-ring-hover { background-color: rgba(200, 163, 106, .18); }
-
-.gw-spark {
-    position: fixed;
-    z-index: 2147483645;
-    pointer-events: none;
-    color: #ffd98a;
-    text-shadow: 0 0 6px #ffd98a;
-    font-size: 14px;
-    line-height: 1;
-}
-
-/* asli cursor tabhi hide hota hai jab custom cursor active ho */
-#hero.gw-cursor-on,
-#hero.gw-cursor-on * {
-    cursor: none !important;
-}
-
-/* Responsive */
-@media (max-width: 991.98px) {
-    #hero {
-        --u: calc(100vw / 700);
-        height: auto;
-        padding-bottom: 40px;
-    }
-    #hero .stage {
-        position: relative;
-        width: 100%;
-        height: calc(var(--u) * 640);
-    }
-    #hero .content {
-        position: relative;
-        left: auto;
-        top: auto;
-        width: auto;
-        padding: 0 28px;
-        text-align: center;
-    }
-    #hero .content .d-flex { justify-content: center; }
-    #hero .badge-bbb { margin-inline: auto; }
-    #hero .far { display: none; }
-    #hero .content h1 { font-size: clamp(22px, 6vw, 34px); }
-    #hero .content p { font-size: 15px; line-height: 1.8; }
-}
-</style>
-    <section class="section-service d-none">
-        <div class="container">
-            <div class="head-1">
-                <h2>Our Services</h2>
-                <p>
-                    Comprehensive Accounting Support for Franchises
-                </p>
-                <span class="span-5">Franchise</span>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-11">
-                    <div class="row">
-
-                        <div class="col-lg-4" data-aos="fade-right">
-                            <div class="content-box">
-                                <figure>
-                                    <img src="images/icon-1.png" class="img-fluid" alt="">
-                                    <span class="span-4">01</span>
-                                </figure>
-                                <div class="content">
-                                    <h3>Bookkeeping Services</h3>
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the
-                                        printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's r
-                                    </p>
-                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
-                            <div class="content-box">
-                                <figure>
-                                    <img src="images/icon-2.png" class="img-fluid" alt="">
-                                    <span class="span-4">02</span>
-                                </figure>
-                                <div class="content">
-                                    <h3>Sales Tax Filings</h3>
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the
-                                        printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's r
-                                    </p>
-                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
-                            <div class="content-box">
-                                <figure>
-                                    <img src="images/icon-3.png" class="img-fluid" alt="">
-                                    <span class="span-4">03</span>
-                                </figure>
-                                <div class="content">
-                                    <h3>Audit Assistance</h3>
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the
-                                        printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's r
-                                    </p>
-                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                            <div class="content-box">
-                                <figure>
-                                    <img src="images/icon-4.png" class="img-fluid" alt="">
-                                    <span class="span-4">04</span>
-                                </figure>
-                                <div class="content">
-                                    <h3>Reconciliation of all Funds</h3>
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the
-                                        printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's r
-                                    </p>
-                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-                            <div class="content-box">
-                                <figure>
-                                    <img src="images/icon-5.png" class="img-fluid" alt="">
-                                    <span class="span-4">05</span>
-                                </figure>
-                                <div class="content">
-                                    <h3>PL Review & Guidance</h3>
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the
-                                        printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's r
-                                    </p>
-                                    <a href="services.php"><i class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="btn-style">
-                    <a href="services.php" class="themeBtn">View All Services</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <style>
-        
-/* Default Card */
-.section-service .content-box {
-  padding: 2.8rem 2rem;
-  background: #fff;
-  box-shadow: 1px 2px 7px #e3d9d9;
-  margin: 0 0rem 3rem;
-  border-radius: 10px;
-  transition: all 0.4s ease;
-  cursor: pointer;
-      height: -webkit-fill-available;
-}
-
-.section-service .content-box figure {
-  display: flex;
-  justify-content: space-between;
-}
-
-.section-service .content-box figure img {
-  transition: all 0.4s ease;
-}
-
-.section-service .content-box figure .span-4 {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #f1f1f1;
-  transition: all 0.4s ease;
-}
-
-.section-service .content-box h3 {
-  font-size: 1.9rem;
-  padding: 2.2rem 0 0.6rem;
-  position: relative;
-  transition: all 0.4s ease;
-}
-
-.section-keeping h2::before,
-.section-service .content-box h3::before {
-  content: "";
-  position: absolute;
-  width: 80px;
-  height: 3px;
-  background: #56c5bf78;
-  top: 19px;
-  left: 0;
-  transition: all 0.4s ease;
-}
-
-.section-service .content-box p {
-  transition: all 0.4s ease;
-}
-
-.section-service .content-box i {
-  padding: 1.2rem 0 0;
-  font-size: 1.9rem;
-  display: block;
-  color: var(--primary);
-  transition: all 0.4s ease;
-}
-
-/* Default First Card Active */
-.section-service .col-lg-4:first-child .content-box {
-  background: var(--secondary);
-  transform: translateY(-8px);
-}
-
-/* Hover Card */
-.section-service .content-box:hover {
-  background: var(--secondary);
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* White Text */
-.section-service .col-lg-4:first-child .content-box h3,
-.section-service .col-lg-4:first-child .content-box p,
-.section-service .col-lg-4:first-child .content-box .span-4,
-.section-service .col-lg-4:first-child .content-box i,
-.section-service .content-box:hover h3,
-.section-service .content-box:hover p,
-.section-service .content-box:hover .span-4,
-.section-service .content-box:hover i {
-  color: #fff;
-}
-
-/* White Image */
-.section-service .col-lg-4:first-child .content-box img,
-.section-service .content-box:hover img {
-  filter: brightness(0) invert(1);
-}
-
-/* Heading Line */
-.section-service .col-lg-4:first-child .content-box h3::before,
-.section-service .content-box:hover h3::before {
-  background: #fff;
-  width: 110px;
-}
-
-/* Remove First Card Active When Another Card Hover */
-.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box {
-  background: #fff;
-  transform: none;
-  box-shadow: 1px 2px 7px #e3d9d9;
-}
-
-.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box h3,
-.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box p,
-.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box .span-4 {
-  color: initial;
-}
-
-.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box i {
-  color: var(--primary);
-}
-
-.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box img {
-  filter: none;
-}
-
-.section-service .row:has(> .col-lg-4:hover)>.col-lg-4:first-child:not(:hover) .content-box h3::before {
-  background: #56c5bf78;
-  width: 80px;
-}
-
-    </style>
+  
     <!-- End SaaS Main Banner -->
     <!-- Start Features Area -->
     <section class="features-area pt-100 pb-70 bg-f4f6fc ">
@@ -1353,290 +985,8 @@ $(function () {
             </div>
         </div>
     </section>
-    <script>
-        (function () {
-            const allImages = [
-                "images/cover-1.webp",
-                "images/cover-2.webp",
-                "images/cover-3.webp",
-                "images/cover-4.webp",
-                 "images/cover-5.webp",
-                "images/cover-6.webp",
-                "images/cover-7.webp",
-                "images/cover-8.webp",
-                 "images/cover-9.webp",
-                "images/cover-10.webp",
-                "images/cover-11.webp",
-                "images/cover-12.webp",
-                 "images/cover-13.webp",
-                "images/cover-14.webp",
-                "images/cover-15.webp",
-                "images/cover-16.webp",
-                 "images/cover-17.webp",
-                "images/cover-18.webp",
-                "images/cover-19.webp",
-                "images/cover-20.webp",
-                 "images/cover-21.webp",
-                "images/cover-22.webp",
-                "images/cover-23.webp",
-                "images/cover-24.webp",
-                 "images/cover-25.webp",
-                "images/cover-26.webp",
-                "images/cover-27.webp",
-                "images/cover-28.webp",
-              
-                "images/cover-29.webp"
-            ];
-
-            const totalCards = 28;                     // 7 columns x 4 rows
-            const shuffled = [...allImages].sort(() => Math.random() - 0.5);
-
-            const grid = document.getElementById('bfsGrid');
-            const inners = [];
-            const flipState = new Array(totalCards).fill(false);   // false = front dikh raha hai
-            const busy = new Array(totalCards).fill(false);
-            const shown = [];                                      // har card par abhi kaun si image dikh rahi hai
-
-            for (let i = 0; i < totalCards; i++) {
-                const img = shuffled[i];
-                shown[i] = img;
-                const card = document.createElement('div');
-                card.className = 'bfs-card';
-                card.innerHTML =
-                    '<div class="bfs-inner" id="bfsInner' + i + '">' +
-                    '<div class="bfs-front"><img decoding="async" src="' + img + '" alt=""></div>' +
-                    '<div class="bfs-back"><img decoding="async" src="' + img + '" alt=""></div>' +
-                    '</div>';
-                grid.appendChild(card);
-                inners.push(document.getElementById('bfsInner' + i));
-            }
-
-            
-            function flipCard(idx) {
-                if (busy[idx]) return;
-                busy[idx] = true;
-
-                const pool = allImages.filter(function (u) {return shown.indexOf(u) === -1;});
-                const next = pool.length ? pool[Math.floor(Math.random() * pool.length)] : shown[idx];
-
-                const hiddenFace = inners[idx].querySelector(flipState[idx] ? '.bfs-front img' : '.bfs-back img');
-                hiddenFace.src = next;
-                shown[idx] = next;
-
-                flipState[idx] = !flipState[idx];
-                inners[idx].classList.toggle('flipped', flipState[idx]);
-                setTimeout(function () {busy[idx] = false;}, 1300);
-            }
-
-            function flipRandom() {
-                const free = inners.map(function (_, i) {return i;}).filter(function (i) {return !busy[i];});
-                if (!free.length) return;
-                flipCard(free[Math.floor(Math.random() * free.length)]);
-            }
-
-            setInterval(flipRandom, 600);              // har 0.6 second mein ek random card flip
-
-            // click karne par bhi card flip ho
-            grid.addEventListener('click', function (e) {
-                const card = e.target.closest('.bfs-card');
-                if (!card) return;
-                flipCard(Array.prototype.indexOf.call(grid.children, card));
-            });
-        })();
-    </script>
-    <style>
-        .book-section {
-            padding: 5rem 0;
-            position: relative;
-            overflow: hidden;
-            background:
-                radial-gradient(circle at 12% 18%, rgba(166, 119, 249, 0.55), transparent 42%),
-                radial-gradient(circle at 88% 82%, rgba(245, 110, 151, 0.38), transparent 45%),
-                radial-gradient(circle at 70% 10%, rgba(195, 165, 255, 0.25), transparent 40%),
-                linear-gradient(160deg, #2a1b5e 0%, #493a7d 50%, #1d1245 100%);
-        }
-
-        /* halki dotted texture, beech mein zyada aur kinaron par ghayab */
-        .book-section::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1.2px, transparent 1.2px);
-            background-size: 34px 34px;
-            -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-            mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-            pointer-events: none;
-        }
-
-        /* tairta hua glass bubble (upar right) */
-        .book-section::after {
-            content: "";
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            right: -120px;
-            top: -120px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.35), rgba(166, 119, 249, 0.15) 60%, transparent 70%);
-            filter: blur(6px);
-            animation: bookFloat 9s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes bookFloat {
-            50% {
-                transform: translate(-40px, 50px) scale(1.1);
-            }
-        }
-
-        .head-1 {
-            padding-bttom: 3rem;
-            overflow: hidden;
-            width: 100%;
-            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
-            mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
-        }
-
-        .head-1 .marquee-title {
-            display: block;
-            width: 100%;
-            margin: 0;
-            white-space: nowrap;
-            font-size: clamp(2.2rem, 6vw, 5rem);
-            font-weight: 700;
-            line-height: 1.2;
-            color: #ffffff;
-            text-shadow:
-                0 4px 24px rgba(166, 119, 249, 0.75),
-                0 0 48px rgba(245, 110, 151, 0.35);
-        }
-
-        .head-1 .track {
-            display: flex;
-            width: max-content;
-            animation: headMarquee 32s linear infinite !important;
-        }
-
-        .head-1:hover .track {
-            animation-play-state: paused;
-        }
-
-        .head-1 .list {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .head-1 .item {
-            padding: 0 0.35em;
-        }
-
-        .head-1 .item.outline {
-            color: transparent;
-            -webkit-text-stroke: 2px #ffffff;
-            text-shadow: 0 0 30px rgba(166, 119, 249, 0.6);
-        }
-
-        .head-1 .dot {
-            font-size: 0.45em;
-            color: #ff9cc8;
-            text-shadow: 0 0 18px rgba(245, 110, 151, 0.9);
-        }
-
-        @keyframes headMarquee {
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* section ka content background ke upar rahe */
-        .book-section>* {
-            position: relative;
-            z-index: 1;
-        }
-
-        .bfs-wrap {
-            /* background: #0a0a0f; */
-            padding: 28px 20px;
-            border-radius: 14px;
-            overflow: hidden;
-        }
-
-        .bfs-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 12px;
-        }
-
-        .bfs-card {
-            perspective: 1000px;
-            height: 210px;
-            cursor: pointer;
-        }
-
-        .bfs-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 1.1s cubic-bezier(0.45, 0.05, 0.15, 1.0);
-            border-radius: 9px;
-        }
-
-        .bfs-inner.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .bfs-front,
-        .bfs-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border-radius: 9px;
-            overflow: hidden;
-        }
-
-        .bfs-front img,
-        .bfs-back img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            border-radius: 9px;
-        }
-
-        .bfs-back {
-            transform: rotateY(180deg);
-        }
-
-        @media (max-width: 700px) {
-            .bfs-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 9px;
-            }
-
-            .bfs-card {
-                height: 155px;
-            }
-        }
-
-        @media (max-width: 420px) {
-            .bfs-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
-            }
-
-            .bfs-card {
-                height: 135px;
-            }
-        }
-    </style>
+    
+   
     <!-- Start Services Area -->
     <section class="services-area ptb-100">
         <div class="container-fluid">

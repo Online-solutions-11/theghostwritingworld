@@ -522,3 +522,603 @@
         overflow-x: hidden !important;
        }
 }
+
+
+   .preloader-area {
+            --t: 1s;
+            /* <-- minimum time (GIF ka ek poora cycle 3s ka hai) */
+
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: opacity .6s ease, visibility .6s ease;
+
+            /* thora dark gradient (wahi purple colors) */
+            background: linear-gradient(135deg,
+                    #C3A5FF 0%,
+                    #B294EE 50%,
+                    #A677F9 100%);
+        }
+
+        .preloader-area.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Soft background glow */
+        .preloader-area::before,
+        .preloader-area::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(2px);
+        }
+
+        .preloader-area::before {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            right: -70px;
+            background: rgba(115, 75, 205, 0.16);
+        }
+
+        .preloader-area::after {
+            width: 260px;
+            height: 260px;
+            bottom: -100px;
+            left: -70px;
+            background: rgba(166, 119, 249, 0.20);
+        }
+
+        /* GIF book */
+        .preloader-area .spinner {
+            position: relative;
+            width: 330px;
+            height: 275px;
+            z-index: 2;
+        }
+
+        .preloader-area .spinner img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* Shadow under the book (GIF mein soft shadow nahi ho sakta, isliye CSS se) */
+        .preloader-area .spinner::before {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 18px;
+            bottom: 6px;
+            left: 50%;
+            margin-left: -125px;
+            border-radius: 50%;
+            background: rgba(73, 58, 125, 0.30);
+            filter: blur(10px);
+        }
+
+        /* Loading label */
+        .preloader-area .loading-text {
+            position: absolute;
+            top: calc(50% + 158px);
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #493A7D;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Loading line (3 second mein poori bharti hai) */
+        .preloader-area .loading-line {
+            position: absolute;
+            top: calc(50% + 190px);
+            left: 50%;
+            width: 130px;
+            height: 3px;
+            overflow: hidden;
+            border-radius: 10px;
+            transform: translateX(-50%);
+            background: rgba(73, 58, 125, 0.18);
+        }
+
+        .preloader-area .loading-line::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background: #734BCD;
+            transform-origin: left center;
+            transform: scaleX(0);
+        }
+
+        .preloader-area.go .loading-line::after {
+            animation: lineFill var(--t) linear forwards;
+        }
+
+        @keyframes lineFill {
+            from {
+                transform: scaleX(0);
+            }
+
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 576px) {
+            .preloader-area .spinner {
+                width: 270px;
+                height: 225px;
+            }
+
+            .preloader-area .spinner::before {
+                width: 200px;
+                margin-left: -100px;
+                bottom: 5px;
+            }
+
+            .preloader-area .loading-text {
+                top: calc(50% + 130px);
+                font-size: 11px;
+                letter-spacing: 3px;
+            }
+
+            .preloader-area .loading-line {
+                top: calc(50% + 158px);
+            }
+        }
+
+        /* hero-section */
+        #hero {
+    --u: calc(100vw / 1488);
+    --gold: #c8a36a;
+    --peach: #f4c98f;
+
+    position: relative;
+    overflow: hidden;
+    height: max(560px, calc(var(--u) * 718));
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(ellipse at 30% 40%, #dabeff 0%, #ab6af9 45%, #7b3fd6 100%);
+}
+
+/* Border */
+#hero::before,
+#hero::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(200, 163, 106, .75);
+    pointer-events: none;
+    z-index: 20;
+    border-radius: 26px 0 0 0;
+}
+#hero::before { inset: 8px; }
+#hero::after  { inset: 16px; border-color: rgba(200, 163, 106, .35); }
+
+/* Floating Elements */
+#hero .s {
+    position: absolute;
+    left: calc(var(--x) * var(--u));
+    top: calc(var(--y) * var(--u));
+    width: calc(var(--w) * var(--u));
+}
+#hero .s img {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Stage */
+#hero .stage {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: calc(var(--u) * 740);
+}
+#hero .room { position: absolute; overflow: visible; }
+#hero .room .star {
+    position: absolute;
+    color: #ffd98a;
+    font-size: calc(var(--u) * 16);
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 8px #ffd98a;
+    pointer-events: none;
+}
+
+/* Book Glow */
+#hero .bookglow {
+    position: absolute;
+    left: 50.1%;
+    top: 58.7%;
+    width: 18%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 240, 200, .95), rgba(255, 220, 150, .35) 45%, transparent 70%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+/* Light cone */
+#hero .lightcone {
+    position: absolute;
+    left: calc(var(--u) * 277);
+    top: calc(var(--u) * 170);
+    width: calc(var(--u) * 330);
+    height: calc(var(--u) * 420);
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at 50% 0, rgba(255, 215, 140, .35), transparent 70%);
+    clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+/* Lamp cord */
+#hero .cord {
+    position: absolute;
+    left: calc(var(--u) * 277);
+    top: 0;
+    width: 2px;
+    height: calc(var(--u) * 66);
+    background: var(--gold);
+}
+
+/* Content */
+#hero .content {
+    position: absolute;
+    left: calc(var(--u) * 780);
+    top: calc(var(--u) * 205);
+    width: calc(var(--u) * 650);
+    z-index: 5;
+}
+#hero .content h1 {
+    text-shadow: 0 2px 12px rgba(60, 20, 110, .35);
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: .3px;
+    font-size: max(22px, calc(var(--u) * 41));
+}
+#hero .content h1 .g { color: #ffe3a3; display: block; }
+#hero .content h1 .w { color: #fff; display: block; font-size: 2rem; }
+#hero .content p {
+    color: #fff3dc;
+    font-size: max(14px, calc(var(--u) * 17));
+    line-height: 1.7;
+    margin: calc(var(--u) * 20) 0 calc(var(--u) * 20);
+}
+
+/* Buttons */
+#hero .btn-gs,
+#hero .btn-cn {
+    color: #f7d9a6;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 8px;
+    padding: .65em 3.3em;
+    font-size: max(13px, calc(var(--u) * 15));
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
+    position: relative;
+    overflow: hidden;
+}
+#hero .btn-gs { background: linear-gradient(#3a7bd5, #1f55b0); }
+#hero .btn-cn { background: linear-gradient(#9a58ec, #6c33c4); }
+#hero .btn-gs:hover,
+#hero .btn-cn:hover { color: #fff; }
+
+/* BBB Badge */
+#hero .badge-bbb {
+    display: block;
+    width: max(130px, calc(var(--u) * 185));
+    margin-top: calc(var(--u) * 14);
+}
+
+/* Other */
+#hero .far { pointer-events: none; }
+#hero .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .45);
+    transform: scale(0);
+    pointer-events: none;
+}
+#hero .booktxt .rv { position: relative; }
+#hero .booktitle {
+    position: absolute;
+    left: 7%;
+    top: 63%;
+    width: 71%;
+    height: 32%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font: 700 calc(var(--u) * 8.5)/1 Georgia, 'Times New Roman', serif;
+    letter-spacing: .08em;
+    color: #f6d98f;
+    text-shadow: 0 1px 1px #2a0f4e, 0 0 4px rgba(255, 217, 138, .5);
+    pointer-events: none;
+}
+
+/* =========================================
+   CUSTOM CURSOR (JS body mein elements banata hai, isliye #hero scope nahi)
+========================================= */
+.gw-dot,
+.gw-ring {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    opacity: 0;
+    will-change: transform;
+    transition: opacity .2s ease;
+}
+.gw-dot {
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    background: #c8a36a;
+    z-index: 2147483647;
+}
+.gw-ring {
+    width: 38px;
+    height: 38px;
+    margin: -19px 0 0 -19px;
+    border: 1.5px solid #c8a36a;
+    background-color: rgba(200, 163, 106, 0);
+    z-index: 2147483646;
+    transition: opacity .2s ease, background-color .3s ease;
+}
+.gw-ring.gw-ring-hover { background-color: rgba(200, 163, 106, .18); }
+
+.gw-spark {
+    position: fixed;
+    z-index: 2147483645;
+    pointer-events: none;
+    color: #ffd98a;
+    text-shadow: 0 0 6px #ffd98a;
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* asli cursor tabhi hide hota hai jab custom cursor active ho */
+#hero.gw-cursor-on,
+#hero.gw-cursor-on * {
+    cursor: none !important;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    #hero {
+        --u: calc(100vw / 700);
+        height: auto;
+        padding-bottom: 40px;
+    }
+    #hero .stage {
+        position: relative;
+        width: 100%;
+        height: calc(var(--u) * 640);
+    }
+    #hero .content {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: auto;
+        padding: 0 28px;
+        text-align: center;
+    }
+    #hero .content .d-flex { justify-content: center; }
+    #hero .badge-bbb { margin-inline: auto; }
+    #hero .far { display: none; }
+    #hero .content h1 { font-size: clamp(22px, 6vw, 34px); }
+    #hero .content p { font-size: 15px; line-height: 1.8; }
+}
+
+/* book cover */
+ .book-section {
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(166, 119, 249, 0.55), transparent 42%),
+                radial-gradient(circle at 88% 82%, rgba(245, 110, 151, 0.38), transparent 45%),
+                radial-gradient(circle at 70% 10%, rgba(195, 165, 255, 0.25), transparent 40%),
+                linear-gradient(160deg, #2a1b5e 0%, #493a7d 50%, #1d1245 100%);
+        }
+
+        /* halki dotted texture, beech mein zyada aur kinaron par ghayab */
+        .book-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1.2px, transparent 1.2px);
+            background-size: 34px 34px;
+            -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+            pointer-events: none;
+        }
+
+        /* tairta hua glass bubble (upar right) */
+        .book-section::after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            right: -120px;
+            top: -120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.35), rgba(166, 119, 249, 0.15) 60%, transparent 70%);
+            filter: blur(6px);
+            animation: bookFloat 9s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes bookFloat {
+            50% {
+                transform: translate(-40px, 50px) scale(1.1);
+            }
+        }
+
+        .head-1 {
+            padding-bttom: 3rem;
+            overflow: hidden;
+            width: 100%;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+        }
+
+        .head-1 .marquee-title {
+            display: block;
+            width: 100%;
+            margin: 0;
+            white-space: nowrap;
+            font-size: clamp(2.2rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: #ffffff;
+            text-shadow:
+                0 4px 24px rgba(166, 119, 249, 0.75),
+                0 0 48px rgba(245, 110, 151, 0.35);
+        }
+
+        .head-1 .track {
+            display: flex;
+            width: max-content;
+            animation: headMarquee 32s linear infinite !important;
+        }
+
+        .head-1:hover .track {
+            animation-play-state: paused;
+        }
+
+        .head-1 .list {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .head-1 .item {
+            padding: 0 0.35em;
+        }
+
+        .head-1 .item.outline {
+            color: transparent;
+            -webkit-text-stroke: 2px #ffffff;
+            text-shadow: 0 0 30px rgba(166, 119, 249, 0.6);
+        }
+
+        .head-1 .dot {
+            font-size: 0.45em;
+            color: #ff9cc8;
+            text-shadow: 0 0 18px rgba(245, 110, 151, 0.9);
+        }
+
+        @keyframes headMarquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* section ka content background ke upar rahe */
+        .book-section>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bfs-wrap {
+            /* background: #0a0a0f; */
+            padding: 28px 20px;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .bfs-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+        }
+
+        .bfs-card {
+            perspective: 1000px;
+            height: 210px;
+            cursor: pointer;
+        }
+
+        .bfs-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1.1s cubic-bezier(0.45, 0.05, 0.15, 1.0);
+            border-radius: 9px;
+        }
+
+        .bfs-inner.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .bfs-front,
+        .bfs-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 9px;
+            overflow: hidden;
+        }
+
+        .bfs-front img,
+        .bfs-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 9px;
+        }
+
+        .bfs-back {
+            transform: rotateY(180deg);
+        }
+
+        @media (max-width: 700px) {
+            .bfs-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 9px;
+            }
+
+            .bfs-card {
+                height: 155px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .bfs-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .bfs-card {
+                height: 135px;
+            }
+        }
